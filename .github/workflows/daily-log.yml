@@ -1,0 +1,56 @@
+name: Daily automated log
+
+on:
+  schedule:
+    # 06:17, 12:17 e 20:17 em America/Bahia (UTC-3).
+    - cron: '17 9,15,23 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-log
+  cancel-in-progress: false
+
+jobs:
+  record:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      TZ: America/Bahia
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+      - name: Record today's automated run
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          from datetime import datetime
+          from pathlib import Path
+          from zoneinfo import ZoneInfo
+
+          path = Path('daily-log.json')
+          today = datetime.now(ZoneInfo('America/Bahia')).date().isoformat()
+          if path.exists() and json.loads(path.read_text())['date'] == today:
+              print('Today is already recorded; no additional commit needed.')
+          else:
+              record = {
+                  'date': today,
+                  'timezone': 'America/Bahia',
+                  'automated': True,
+                  'description': 'Daily automated workflow execution record; not manual development activity.'
+              }
+              path.write_text(json.dumps(record, indent=2) + '\n')
+          PY
+          git add -- daily-log.json
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          git config user.name 'Jhenrique00'
+          git config user.email '172164620+Jhenrique00@users.noreply.github.com'
+          git commit -m "chore: automated daily log $(date +%F)"
+          git push
