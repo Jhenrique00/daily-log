@@ -1,8 +1,9 @@
 # Daily Log — Repository Reliability Lab
 
 An automated repository maintenance pipeline built with Python and GitHub Actions.
-It validates real files, runs regression tests, and reports operational reliability
-without generating daily commits or claiming human development activity.
+It validates real files, runs regression tests, and archives verified audit reports
+on seven of every eight calendar days (87.5%). These commits are automated telemetry,
+not evidence of human development activity.
 
 [![Repository maintenance](https://github.com/Jhenrique00/daily-log/actions/workflows/daily-log.yml/badge.svg)](https://github.com/Jhenrique00/daily-log/actions/workflows/daily-log.yml)
 
@@ -16,8 +17,9 @@ without generating daily commits or claiming human development activity.
   and diagnostic logs retained even when a check fails.
 - **Resilience:** bounded API retries, pagination, explicit failure on incomplete
   history, timeouts and serialized execution per branch.
-- **Least privilege:** read-only repository permissions, temporary GitHub token,
-  immutable action references and no recurring repository writes.
+- **Least privilege:** read-only audit jobs and a separate publisher with write
+  permission only for scheduled/manual runs on main; temporary GitHub token and
+  immutable action references.
 
 This is a small engineering lab, not a production service or evidence of daily
 manual coding. Its value is in the implementation and reproducible tests.
@@ -32,6 +34,8 @@ flowchart LR
     D --> E[Read workflow history]
     E --> F[JSON metrics + Markdown summary + logs]
     F --> G[Actions artifacts: 30 days]
+    G --> H[Successful scheduled/manual audit]
+    H --> I[One report commit on 7 of 8 days]
 ```
 
 The audit lives in [scripts/audit.py](scripts/audit.py), its regression suite in
@@ -48,10 +52,35 @@ The current day is excluded because it is still in progress. Duplicate runs coun
 once. Push/PR checks do not count. Missing days remain missing; zero eligible days
 produce `null`/N/A, not 100%. Runs are assigned to their creation date in Bahia.
 
-**85% is an indicative operational target**, not a promise, test failure threshold,
-commit target or contribution-graph objective. It does not trigger extra commits,
-backdating, random work or retrospective records. API errors make metrics unavailable
-and fail the audit instead of publishing a fabricated healthy result.
+**85% remains an indicative audit reliability target**, separate from the 87.5%
+report-publication schedule below. API errors make metrics unavailable and fail the
+audit instead of publishing a fabricated healthy result.
+
+## Automated report commits and profile activity
+
+Starting on 2026-10-25, publication follows a deterministic eight-day cycle:
+seven eligible days, then one rest day. With successful execution, every full cycle
+has 87.5% publication coverage; any 30-day window has 26 or 27 eligible days
+(86.7% or 90%). This is a schedule, not a guarantee of the profile's green-square rate.
+Existing activity, contributions in other repositories, failures and GitHub's counting
+rules affect the actual profile. No dates are backfilled and no empty commits are made.
+
+On eligible days, the first successful scheduled/manual audit archives its measured
+inventory, hashes, test outcome and run metrics in `data/latest-audit.json`. The second
+run still performs checks but does not create another report commit that day.
+Git history retains earlier reports. Push and PR audits never publish report commits.
+Stale, failed, offline or unrelated run reports are rejected. A concurrent change to
+main causes publication to fail safely; the next scheduled run can try again.
+
+Commit messages use `chore(automation)` and explicitly identify machine-generated
+telemetry. The account's GitHub noreply address associates report authorship with
+`Jhenrique00`; the committer is `github-actions[bot]`. This attribution is intentional
+for profile contribution counting and does not mean the owner wrote code that day.
+The project remains public so its activity can be inspected without private-profile
+settings. GitHub may take up to 24 hours to display qualifying contributions.
+
+The publication rule is implemented in [publish_report.py](scripts/publish_report.py)
+and verified by [publication tests](tests/test_publish_report.py).
 
 `metrics.json` includes 7/30-day coverage, missing dates, workflow conclusions,
 file hashes, sizes, tested commit and run ID. `summary.md`, `tests.log` and
@@ -100,17 +129,19 @@ checks, also providing another opportunity after a transient failure.
 ## Historical transparency
 
 The original workflow updated a date-only record daily using the account's author
-identity. That approach was replaced by read-only checks and artifacts. The existing
+identity. It was replaced by audits and artifacts, then extended to archive actual
+successful audit reports on the documented 7-of-8-day cycle. The existing
 [daily-log.json](daily-log.json) remains as an unchanged legacy record; prior commits
 are preserved. Neither those records nor automated runs represent human coding days.
 
 ## Design tradeoffs
 
-Artifacts keep generated output separate from source history and avoid commit noise.
-The tradeoff is retention-limited reports and no public dashboard. Standard-library
-Python reduces installation overhead, while explicit API pagination and tests keep
-the reliability calculation inspectable. Future improvements should answer real
-needs, such as durable report storage or an external missed-run monitor.
+Artifacts retain detailed diagnostic logs for 30 days. Committing the latest report
+also preserves measured results in Git history, at the cost of regular automated
+commits and repository growth. Standard-library Python reduces installation overhead,
+while explicit API pagination and tests keep the reliability calculation inspectable.
+An external missed-run monitor remains a possible future improvement.
 
 References: [GitHub scheduled events](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule)
 and [workflow run API](https://docs.github.com/en/rest/actions/workflow-runs).
+Contribution criteria: [GitHub profile contributions reference](https://docs.github.com/en/account-and-profile/reference/profile-contributions-reference).
