@@ -89,6 +89,9 @@ checks, also providing another opportunity after a transient failure.
   allowances, disabled workflows and deleted history affect observations.
 - Configure GitHub's Actions notifications to receive failure alerts. This project
   does not send emails or open issues. A run that never starts cannot alert by itself.
+- In a public repository, GitHub disables schedules after 60 days without repository
+  activity. Re-enable the workflow in Actions if that happens; do not manufacture
+  commits to keep it alive. See [GitHub's workflow lifecycle documentation](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/disable-and-enable-workflows).
 - Artifact retention is 30 days, not permanent archival. External URLs and Markdown
   anchor existence are intentionally outside the local file-link check's scope.
 - No dependency vulnerability scan is claimed: the application has no third-party
