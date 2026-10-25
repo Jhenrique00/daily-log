@@ -1,56 +1,58 @@
-name: Daily automated log
+name: Repository maintenance
 
 on:
   schedule:
-    # 06:17, 12:17 e 20:17 em America/Bahia (UTC-3).
-    - cron: '17 9,15,23 * * *'
+    # 06:17 and 20:17 America/Bahia. Each run performs actual checks.
+    - cron: '17 9,23 * * *'
   workflow_dispatch:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 permissions:
-  contents: write
+  contents: read
+  actions: read
 
 concurrency:
-  group: daily-log
+  group: maintenance-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
-  record:
+  audit:
+    if: github.repository == 'Jhenrique00/daily-log'
     runs-on: ubuntu-latest
-    timeout-minutes: 5
-    env:
-      TZ: America/Bahia
+    timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
-          ref: ${{ github.event.repository.default_branch }}
-      - name: Record today's automated run
+          persist-credentials: false
+      - name: Validate, test and measure
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EVENT_NAME: ${{ github.event_name }}
         shell: bash
         run: |
           set -euo pipefail
-          python3 - <<'PY'
-          import json
-          from datetime import datetime
-          from pathlib import Path
-          from zoneinfo import ZoneInfo
-
-          path = Path('daily-log.json')
-          today = datetime.now(ZoneInfo('America/Bahia')).date().isoformat()
-          if path.exists() and json.loads(path.read_text())['date'] == today:
-              print('Today is already recorded; no additional commit needed.')
-          else:
-              record = {
-                  'date': today,
-                  'timezone': 'America/Bahia',
-                  'automated': True,
-                  'description': 'Daily automated workflow execution record; not manual development activity.'
-              }
-              path.write_text(json.dumps(record, indent=2) + '\n')
-          PY
-          git add -- daily-log.json
-          if git diff --cached --quiet; then
-            exit 0
+          if [[ "$EVENT_NAME" == "pull_request" ]]; then
+            python3 scripts/audit.py --offline
+          else
+            python3 scripts/audit.py
           fi
-          git config user.name 'Jhenrique00'
-          git config user.email '172164620+Jhenrique00@users.noreply.github.com'
-          git commit -m "chore: automated daily log $(date +%F)"
-          git push
+      - name: Publish summary even on failure
+        if: always()
+        shell: bash
+        run: |
+          if [[ -f reports/summary.md ]]; then
+            cat reports/summary.md >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo 'Audit did not produce a report. Inspect the failed step logs.' >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Retain reports and diagnostic logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: maintenance-${{ github.run_id }}-${{ github.run_attempt }}
+          path: reports/
+          if-no-files-found: error
+          retention-days: 30
