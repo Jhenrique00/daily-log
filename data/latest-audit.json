@@ -1,17 +1,17 @@
 {
-  "publication_date": "2026-10-25",
+  "publication_date": "2026-10-26",
   "timezone": "America/Bahia",
   "automated": true,
   "human_development": false,
   "description": "Machine-generated audit telemetry; not manual development.",
-  "run_url": "https://github.com/Jhenrique00/daily-log/actions/runs/40172198710",
+  "run_url": "https://github.com/Jhenrique00/daily-log/actions/runs/40356635285",
   "publication_target_percent": 87.5,
   "audit": {
     "automated": true,
     "human_development": false,
-    "observed_at": "2026-10-25T07:17:17.991234+00:00",
-    "commit": "cac12b2ab14795cc4fafd53b1e2f79b4c73744b1",
-    "run_id": "40172198710",
+    "observed_at": "2026-10-26T16:11:11.996535+00:00",
+    "commit": "b300cba014c88b48519fa010081756755ea6f7da",
+    "run_id": "40356635285",
     "errors": [],
     "metrics_status": "available",
     "inventory": {
@@ -42,6 +42,11 @@
           "sha256": "05323796ab96ee437f9cd85154a2561c6886a80acc59ec303e71669911bce8a8"
         },
         {
+          "path": "data/latest-audit.json",
+          "bytes": 2951,
+          "sha256": "e0d6bf4e8618cd84b629ee2f684b88d694e2bfb5ae86e7316ba6c682eecf58fc"
+        },
+        {
           "path": "scripts/audit.py",
           "bytes": 7744,
           "sha256": "3a4bafd3e0ff0c9360d8df4eefb3728737f34c083a28a8212ec87c2a4222bfc8"
@@ -62,8 +67,8 @@
           "sha256": "205e5249283fd9f573825235024e3d502551522686a787647867bfdfb392c99e"
         }
       ],
-      "file_count": 9,
-      "total_bytes": 31031,
+      "file_count": 10,
+      "total_bytes": 33982,
       "errors": []
     },
     "tests": {
@@ -73,24 +78,28 @@
       {
         "window_days": 7,
         "from": "2026-10-25",
-        "through": "2026-10-24",
-        "eligible_days": 0,
-        "successful_days": 0,
-        "coverage_percent": null,
+        "through": "2026-10-25",
+        "eligible_days": 1,
+        "successful_days": 1,
+        "coverage_percent": 100.0,
         "indicative_target_percent": 85,
         "missing_days": [],
-        "run_conclusions": {}
+        "run_conclusions": {
+          "success": 3
+        }
       },
       {
         "window_days": 30,
         "from": "2026-10-25",
-        "through": "2026-10-24",
-        "eligible_days": 0,
-        "successful_days": 0,
-        "coverage_percent": null,
+        "through": "2026-10-25",
+        "eligible_days": 1,
+        "successful_days": 1,
+        "coverage_percent": 100.0,
         "indicative_target_percent": 85,
         "missing_days": [],
-        "run_conclusions": {}
+        "run_conclusions": {
+          "success": 3
+        }
       }
     ],
     "status": "success"
