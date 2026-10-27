@@ -1,6 +1,8 @@
 """Archive a successful current-day audit on seven of every eight days."""
 import json
 import os
+import copy
+import secrets
 from datetime import date, datetime
 from pathlib import Path
 import subprocess
@@ -48,6 +50,37 @@ def prepare(root, today, expected_sha, run_id):
     return True, "Current-day verified report prepared."
 
 
+def commit_batch(root, count=None):
+    """Commit one measured report in transparent batches, not separate audits."""
+    count = secrets.randbelow(15) + 1 if count is None else count
+    if type(count) is not int or not 1 <= count <= 15:
+        raise ValueError("Batch size must be between 1 and 15")
+    target = root / "data/latest-audit.json"
+    record = json.loads(target.read_text(encoding="utf-8"))
+    files = record["audit"]["inventory"]["files"]
+    fields = [(i, key, value) for i, item in enumerate(files) for key, value in item.items()]
+    count = min(count, max(1, len(fields)))
+    for part in range(1, count + 1):
+        snapshot = copy.deepcopy(record)
+        snapshot["publication"] = {"automatic_commits": count, "part": part,
+                                   "complete": part == count,
+                                   "manual_commits_counted": False,
+                                   "strategy": "Random batching of one verified audit, not independent audits"}
+        partial = {}
+        for index, key, value in fields[:len(fields) * part // count]:
+            partial.setdefault(index, {})[key] = value
+        visible = list(partial.values())
+        snapshot["audit"]["inventory"].update(files=visible, file_count=len(visible),
+                                             total_bytes=sum(item.get("bytes", 0) for item in visible))
+        target.write_text(json.dumps(snapshot, indent=2) + "\n", encoding="utf-8")
+        subprocess.run(["git", "add", "--", "data/latest-audit.json"], cwd=root, check=True)
+        subprocess.run(["git", "commit", "-m",
+                        f"chore(automation): audit {record['publication_date']} batch {part}/{count}",
+                        "-m", "Automatically partitioned telemetry from one audit. Not manual development."],
+                       cwd=root, check=True)
+    return count
+
+
 def main():
     if (os.environ.get("GITHUB_REPOSITORY") != REPOSITORY
             or os.environ.get("GITHUB_REF") != "refs/heads/main"
@@ -58,6 +91,9 @@ def main():
         raise ValueError("Checkout differs from the audited commit; retry with a new run")
     changed, message = prepare(Path.cwd(), datetime.now(ZONE).date(), sha, os.environ["GITHUB_RUN_ID"])
     print(message)
+    if changed:
+        count = commit_batch(Path.cwd())
+        print(f"Prepared {count} automatic commits; manual activity is not counted.")
     with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
         output.write(f"publish={'true' if changed else 'false'}\n")
 

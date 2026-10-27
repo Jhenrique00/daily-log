@@ -35,7 +35,7 @@ flowchart LR
     E --> F[JSON metrics + Markdown summary + logs]
     F --> G[Actions artifacts: 30 days]
     G --> H[Successful scheduled/manual audit]
-    H --> I[One report commit on 7 of 8 days]
+    H --> I[1 to 15 automated report batches on 7 of 8 days]
 ```
 
 The audit lives in [scripts/audit.py](scripts/audit.py), its regression suite in
@@ -67,7 +67,16 @@ rules affect the actual profile. No dates are backfilled and no empty commits ar
 
 On eligible days, the first successful scheduled/manual audit archives its measured
 inventory, hashes, test outcome and run metrics in `data/latest-audit.json`. The second
-run still performs checks but does not create another report commit that day.
+run still performs checks but does not publish another batch that day.
+Each eligible day selects a random total of **1 to 15 automated commits**, independently
+of manual contributions. One verified audit is archived in incremental inventory batches;
+these are not 15 separate audits or human coding sessions. Every intermediate snapshot
+marks publication as incomplete; the last contains the complete report. All commits are
+pushed together. Inventory fields (paths, sizes and hashes) are added incrementally. With fewer than
+15 measured fields, the total is capped to avoid empty batches.
+Repeated runs do not add more commits after that day has been published. No manual
+commits are inspected or included in this limit. Randomness does not guarantee that
+adjacent days have different counts. Checks continue on rest days without publishing.
 Git history retains earlier reports. Push and PR audits never publish report commits.
 Stale, failed, offline or unrelated run reports are rejected. A concurrent change to
 main causes publication to fail safely; the next scheduled run can try again.
