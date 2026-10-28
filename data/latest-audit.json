@@ -48,11 +48,27 @@
         },
         {
           "path": "scripts/audit.py",
-          "bytes": 7744
+          "bytes": 7744,
+          "sha256": "3a4bafd3e0ff0c9360d8df4eefb3728737f34c083a28a8212ec87c2a4222bfc8"
+        },
+        {
+          "path": "scripts/publish_report.py",
+          "bytes": 5293,
+          "sha256": "ff4c7ca5daa77ecd39fbfa3c4f2d14a749cf3d4f1e7904c05c35bd6e6e4f0669"
+        },
+        {
+          "path": "tests/test_audit.py",
+          "bytes": 4765,
+          "sha256": "484e6a139573c0747808dd9de3bbfba00cbb530018addbb7c1b6424e00702477"
+        },
+        {
+          "path": "tests/test_publish_report.py",
+          "bytes": 5933,
+          "sha256": "7d4f425b6b423a2ed3c750b915f95c82dae96c89ab211018126bb4abb43ad883"
         }
       ],
-      "file_count": 7,
-      "total_bytes": 23648,
+      "file_count": 10,
+      "total_bytes": 39639,
       "errors": []
     },
     "tests": {
@@ -90,8 +106,8 @@
   },
   "publication": {
     "automatic_commits": 3,
-    "part": 2,
-    "complete": false,
+    "part": 3,
+    "complete": true,
     "manual_commits_counted": false,
     "strategy": "Random batching of one verified audit, not independent audits"
   }
