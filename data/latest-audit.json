@@ -32,11 +32,27 @@
           "sha256": "ad751794ab98780b59fea9f8cd551df00806304e20046314e4f460a21114d4e8"
         },
         {
-          "path": "automation.json"
+          "path": "automation.json",
+          "bytes": 86,
+          "sha256": "e83974be60913c7d8e8eca771eeef4741354a7bddf91391d3f461e7ecc83fc6e"
+        },
+        {
+          "path": "daily-log.json",
+          "bytes": 175,
+          "sha256": "05323796ab96ee437f9cd85154a2561c6886a80acc59ec303e71669911bce8a8"
+        },
+        {
+          "path": "data/latest-audit.json",
+          "bytes": 3401,
+          "sha256": "f75056b7afdf8042b479f87203c3d64a66dd740a2ad4a4c4df7e7eae998d053f"
+        },
+        {
+          "path": "scripts/audit.py",
+          "bytes": 7744
         }
       ],
-      "file_count": 4,
-      "total_bytes": 12242,
+      "file_count": 7,
+      "total_bytes": 23648,
       "errors": []
     },
     "tests": {
@@ -74,7 +90,7 @@
   },
   "publication": {
     "automatic_commits": 3,
-    "part": 1,
+    "part": 2,
     "complete": false,
     "manual_commits_counted": false,
     "strategy": "Random batching of one verified audit, not independent audits"
