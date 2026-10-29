@@ -60,10 +60,15 @@
           "path": "tests/test_audit.py",
           "bytes": 4765,
           "sha256": "484e6a139573c0747808dd9de3bbfba00cbb530018addbb7c1b6424e00702477"
+        },
+        {
+          "path": "tests/test_publish_report.py",
+          "bytes": 5933,
+          "sha256": "7d4f425b6b423a2ed3c750b915f95c82dae96c89ab211018126bb4abb43ad883"
         }
       ],
-      "file_count": 9,
-      "total_bytes": 33706,
+      "file_count": 10,
+      "total_bytes": 39639,
       "errors": []
     },
     "tests": {
@@ -101,8 +106,8 @@
   },
   "publication": {
     "automatic_commits": 13,
-    "part": 12,
-    "complete": false,
+    "part": 13,
+    "complete": true,
     "manual_commits_counted": false,
     "strategy": "Random batching of one verified audit, not independent audits"
   }
