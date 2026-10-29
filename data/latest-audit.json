@@ -18,10 +18,14 @@
       "files": [
         {
           "path": ".github/workflows/daily-log.yml",
-          "bytes": 2920
+          "bytes": 2920,
+          "sha256": "44ec6093335735277f5725f780e4d2d8a7057c241747b0a4b190a1eed3a32559"
+        },
+        {
+          "path": ".gitignore"
         }
       ],
-      "file_count": 1,
+      "file_count": 2,
       "total_bytes": 2920,
       "errors": []
     },
@@ -60,7 +64,7 @@
   },
   "publication": {
     "automatic_commits": 13,
-    "part": 1,
+    "part": 2,
     "complete": false,
     "manual_commits_counted": false,
     "strategy": "Random batching of one verified audit, not independent audits"
