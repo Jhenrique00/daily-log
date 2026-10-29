@@ -22,11 +22,13 @@
           "sha256": "44ec6093335735277f5725f780e4d2d8a7057c241747b0a4b190a1eed3a32559"
         },
         {
-          "path": ".gitignore"
+          "path": ".gitignore",
+          "bytes": 28,
+          "sha256": "6525fc512c0b3a603b1b8f31c2369f333beb111e6bd9fcf540860ec9f5e22b37"
         }
       ],
       "file_count": 2,
-      "total_bytes": 2920,
+      "total_bytes": 2948,
       "errors": []
     },
     "tests": {
@@ -64,7 +66,7 @@
   },
   "publication": {
     "automatic_commits": 13,
-    "part": 2,
+    "part": 3,
     "complete": false,
     "manual_commits_counted": false,
     "strategy": "Random batching of one verified audit, not independent audits"
