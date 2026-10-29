@@ -33,10 +33,14 @@
         },
         {
           "path": "automation.json",
-          "bytes": 86
+          "bytes": 86,
+          "sha256": "e83974be60913c7d8e8eca771eeef4741354a7bddf91391d3f461e7ecc83fc6e"
+        },
+        {
+          "path": "daily-log.json"
         }
       ],
-      "file_count": 4,
+      "file_count": 5,
       "total_bytes": 12328,
       "errors": []
     },
@@ -75,7 +79,7 @@
   },
   "publication": {
     "automatic_commits": 13,
-    "part": 5,
+    "part": 6,
     "complete": false,
     "manual_commits_counted": false,
     "strategy": "Random batching of one verified audit, not independent audits"
