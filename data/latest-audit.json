@@ -45,10 +45,15 @@
           "path": "data/latest-audit.json",
           "bytes": 3405,
           "sha256": "94da631bdaf62c985f6d5f1b91afe01e60adab41314ad45d52c1978843477f35"
+        },
+        {
+          "path": "scripts/audit.py",
+          "bytes": 7744,
+          "sha256": "3a4bafd3e0ff0c9360d8df4eefb3728737f34c083a28a8212ec87c2a4222bfc8"
         }
       ],
-      "file_count": 6,
-      "total_bytes": 15908,
+      "file_count": 7,
+      "total_bytes": 23652,
       "errors": []
     },
     "tests": {
@@ -86,7 +91,7 @@
   },
   "publication": {
     "automatic_commits": 10,
-    "part": 6,
+    "part": 7,
     "complete": false,
     "manual_commits_counted": false,
     "strategy": "Random batching of one verified audit, not independent audits"
