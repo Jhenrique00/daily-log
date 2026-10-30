@@ -25,10 +25,15 @@
           "path": ".gitignore",
           "bytes": 28,
           "sha256": "6525fc512c0b3a603b1b8f31c2369f333beb111e6bd9fcf540860ec9f5e22b37"
+        },
+        {
+          "path": "README.md",
+          "bytes": 9294,
+          "sha256": "ad751794ab98780b59fea9f8cd551df00806304e20046314e4f460a21114d4e8"
         }
       ],
-      "file_count": 2,
-      "total_bytes": 2948,
+      "file_count": 3,
+      "total_bytes": 12242,
       "errors": []
     },
     "tests": {
@@ -66,7 +71,7 @@
   },
   "publication": {
     "automatic_commits": 10,
-    "part": 2,
+    "part": 3,
     "complete": false,
     "manual_commits_counted": false,
     "strategy": "Random batching of one verified audit, not independent audits"
