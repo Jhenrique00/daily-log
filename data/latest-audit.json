@@ -40,10 +40,14 @@
           "path": "daily-log.json",
           "bytes": 175,
           "sha256": "05323796ab96ee437f9cd85154a2561c6886a80acc59ec303e71669911bce8a8"
+        },
+        {
+          "path": "data/latest-audit.json",
+          "bytes": 3405
         }
       ],
-      "file_count": 5,
-      "total_bytes": 12503,
+      "file_count": 6,
+      "total_bytes": 15908,
       "errors": []
     },
     "tests": {
@@ -81,7 +85,7 @@
   },
   "publication": {
     "automatic_commits": 12,
-    "part": 6,
+    "part": 7,
     "complete": false,
     "manual_commits_counted": false,
     "strategy": "Random batching of one verified audit, not independent audits"
