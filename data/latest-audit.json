@@ -32,11 +32,13 @@
           "sha256": "ad751794ab98780b59fea9f8cd551df00806304e20046314e4f460a21114d4e8"
         },
         {
-          "path": "automation.json"
+          "path": "automation.json",
+          "bytes": 86,
+          "sha256": "e83974be60913c7d8e8eca771eeef4741354a7bddf91391d3f461e7ecc83fc6e"
         }
       ],
       "file_count": 4,
-      "total_bytes": 12242,
+      "total_bytes": 12328,
       "errors": []
     },
     "tests": {
@@ -74,7 +76,7 @@
   },
   "publication": {
     "automatic_commits": 12,
-    "part": 4,
+    "part": 5,
     "complete": false,
     "manual_commits_counted": false,
     "strategy": "Random batching of one verified audit, not independent audits"
