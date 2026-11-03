@@ -40,10 +40,35 @@
           "path": "daily-log.json",
           "bytes": 175,
           "sha256": "05323796ab96ee437f9cd85154a2561c6886a80acc59ec303e71669911bce8a8"
+        },
+        {
+          "path": "data/latest-audit.json",
+          "bytes": 3405,
+          "sha256": "08d42a9312199a8e6e05b2295cf49e6bd4140ace5f5e209c7711fd30c593c038"
+        },
+        {
+          "path": "scripts/audit.py",
+          "bytes": 7744,
+          "sha256": "3a4bafd3e0ff0c9360d8df4eefb3728737f34c083a28a8212ec87c2a4222bfc8"
+        },
+        {
+          "path": "scripts/publish_report.py",
+          "bytes": 5293,
+          "sha256": "ff4c7ca5daa77ecd39fbfa3c4f2d14a749cf3d4f1e7904c05c35bd6e6e4f0669"
+        },
+        {
+          "path": "tests/test_audit.py",
+          "bytes": 4765,
+          "sha256": "484e6a139573c0747808dd9de3bbfba00cbb530018addbb7c1b6424e00702477"
+        },
+        {
+          "path": "tests/test_publish_report.py",
+          "bytes": 5933,
+          "sha256": "7d4f425b6b423a2ed3c750b915f95c82dae96c89ab211018126bb4abb43ad883"
         }
       ],
-      "file_count": 5,
-      "total_bytes": 12503,
+      "file_count": 10,
+      "total_bytes": 39643,
       "errors": []
     },
     "tests": {
@@ -81,8 +106,8 @@
   },
   "publication": {
     "automatic_commits": 2,
-    "part": 1,
-    "complete": false,
+    "part": 2,
+    "complete": true,
     "manual_commits_counted": false,
     "strategy": "Random batching of one verified audit, not independent audits"
   }
