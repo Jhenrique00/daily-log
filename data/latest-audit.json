@@ -42,11 +42,13 @@
           "sha256": "05323796ab96ee437f9cd85154a2561c6886a80acc59ec303e71669911bce8a8"
         },
         {
-          "path": "data/latest-audit.json"
+          "path": "data/latest-audit.json",
+          "bytes": 3405,
+          "sha256": "943048d79bfe8b92ba97fed56e608ca098f5b07833710b14140f42be131757d7"
         }
       ],
       "file_count": 6,
-      "total_bytes": 12503,
+      "total_bytes": 15908,
       "errors": []
     },
     "tests": {
@@ -84,7 +86,7 @@
   },
   "publication": {
     "automatic_commits": 15,
-    "part": 8,
+    "part": 9,
     "complete": false,
     "manual_commits_counted": false,
     "strategy": "Random batching of one verified audit, not independent audits"
