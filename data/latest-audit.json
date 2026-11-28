@@ -1,17 +1,17 @@
 {
-  "publication_date": "2026-11-27",
+  "publication_date": "2026-11-28",
   "timezone": "America/Bahia",
   "automated": true,
   "human_development": false,
   "description": "Machine-generated audit telemetry; not manual development.",
-  "run_url": "https://github.com/Jhenrique00/daily-log/actions/runs/45943785042",
+  "run_url": "https://github.com/Jhenrique00/daily-log/actions/runs/46108984791",
   "publication_target_percent": 87.5,
   "audit": {
     "automated": true,
     "human_development": false,
-    "observed_at": "2026-11-27T05:06:27.295864+00:00",
-    "commit": "bcea82bd7c5c911ef53f29dbe50ffb7a73d1bcfc",
-    "run_id": "45943785042",
+    "observed_at": "2026-11-28T04:45:17.494133+00:00",
+    "commit": "ae32026f736e7cf089e8e711fa704aef666d457a",
+    "run_id": "46108984791",
     "errors": [],
     "metrics_status": "available",
     "inventory": {
@@ -32,43 +32,11 @@
           "sha256": "ad751794ab98780b59fea9f8cd551df00806304e20046314e4f460a21114d4e8"
         },
         {
-          "path": "automation.json",
-          "bytes": 86,
-          "sha256": "e83974be60913c7d8e8eca771eeef4741354a7bddf91391d3f461e7ecc83fc6e"
-        },
-        {
-          "path": "daily-log.json",
-          "bytes": 175,
-          "sha256": "05323796ab96ee437f9cd85154a2561c6886a80acc59ec303e71669911bce8a8"
-        },
-        {
-          "path": "data/latest-audit.json",
-          "bytes": 3405,
-          "sha256": "47d4d1154dcf463b3d5b4466dbf605484c722874776256abf8e1f109d57afa46"
-        },
-        {
-          "path": "scripts/audit.py",
-          "bytes": 7744,
-          "sha256": "3a4bafd3e0ff0c9360d8df4eefb3728737f34c083a28a8212ec87c2a4222bfc8"
-        },
-        {
-          "path": "scripts/publish_report.py",
-          "bytes": 5293,
-          "sha256": "ff4c7ca5daa77ecd39fbfa3c4f2d14a749cf3d4f1e7904c05c35bd6e6e4f0669"
-        },
-        {
-          "path": "tests/test_audit.py",
-          "bytes": 4765,
-          "sha256": "484e6a139573c0747808dd9de3bbfba00cbb530018addbb7c1b6424e00702477"
-        },
-        {
-          "path": "tests/test_publish_report.py",
-          "bytes": 5933,
-          "sha256": "7d4f425b6b423a2ed3c750b915f95c82dae96c89ab211018126bb4abb43ad883"
+          "path": "automation.json"
         }
       ],
-      "file_count": 10,
-      "total_bytes": 39643,
+      "file_count": 4,
+      "total_bytes": 12242,
       "errors": []
     },
     "tests": {
@@ -77,8 +45,8 @@
     "metrics": [
       {
         "window_days": 7,
-        "from": "2026-11-20",
-        "through": "2026-11-26",
+        "from": "2026-11-21",
+        "through": "2026-11-27",
         "eligible_days": 7,
         "successful_days": 7,
         "coverage_percent": 100.0,
@@ -90,8 +58,8 @@
       },
       {
         "window_days": 30,
-        "from": "2026-10-28",
-        "through": "2026-11-26",
+        "from": "2026-10-29",
+        "through": "2026-11-27",
         "eligible_days": 30,
         "successful_days": 30,
         "coverage_percent": 100.0,
@@ -106,8 +74,8 @@
   },
   "publication": {
     "automatic_commits": 3,
-    "part": 3,
-    "complete": true,
+    "part": 1,
+    "complete": false,
     "manual_commits_counted": false,
     "strategy": "Random batching of one verified audit, not independent audits"
   }
